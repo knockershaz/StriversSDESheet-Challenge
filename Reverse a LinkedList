@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
+{
+    if(head==NULL || head->next==NULL)return head;
+    LinkedListNode<int> *prev = NULL;
+    LinkedListNode<int> *pres = head;
+    LinkedListNode<int> *next = head->next;
+    while(pres!=NULL){
+        pres->next=prev;
+        prev=pres;
+        pres=next;
+        if(next!=NULL)next=next->next;
+    }
+    return prev;
+}
