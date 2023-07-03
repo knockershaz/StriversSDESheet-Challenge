@@ -1,0 +1,14 @@
+vector<int> stringMatch(string t, string p) {
+	int ps = p.size();
+	int i=0,j=ps-1;
+	int ts = t.size();
+	vector<int>res;
+	while(j<ts){
+		if(t.substr(i,ps)==p){
+			res.push_back(i+1);
+		}
+		i++;
+		j++;
+	}
+	return res;
+}
