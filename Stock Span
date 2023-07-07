@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+vector<int> findStockSpans(vector<int>& p) {
+    int n = p.size();
+    stack<pair<int,int>>st;
+    pair<int,int> p1 = make_pair(p[0],1);
+    vector<int>ans;
+    ans.push_back(1);
+    st.push(p1);
+    for(int i=1;i<n;i++){
+        int span=1;
+        while(!st.empty() and p[i]>st.top().first){
+            span+=st.top().second;
+            st.pop();
+        }
+        pair<int,int> p2 = make_pair(p[i],span);
+        ans.push_back(span);
+        st.push(p2);
+    }
+    return ans;
+}
