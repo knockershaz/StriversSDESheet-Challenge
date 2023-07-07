@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+class LRUCache
+{
+public:
+    list<pair<int,int>>l;
+    map<int,list<pair<int,int>>::iterator>m;
+    int capacity;
+    void refresh(int k,int v){
+        l.erase(m[k]);
+        l.push_front(make_pair(k,v));
+        m[k] = l.begin();
+    }
+    LRUCache(int capacity)
+    {
+        this->capacity = capacity;
+    }
+
+    int get(int key)
+    {
+        if(m.find(key)!=m.end()){
+            refresh(key, (*m[key]).second);
+            return (*m[key]).second;
+        }
+        return -1;
+    }
+
+    void put(int key, int value)
+    {
+        if(m.find(key)!=m.end())refresh(key, value);
+        else{
+            l.push_front(make_pair(key,value));
+            m[key] = l.begin();
+            if(m.size()>capacity){
+                m.erase(l.back().first);
+                l.pop_back();
+            }
+        }
+    }
+};
