@@ -1,0 +1,17 @@
+int mul(int m,int n){
+  double res=1.0;
+  for(int i=1;i<=n;i++){
+    res=res*m;
+  }
+  return res;
+}
+int NthRoot(int n, int m) {
+    int l=1,h=m;
+    while((h-l)>=0){
+      int mid = (l+h)>>1;
+      if(pow(mid,n)==m)return mid;
+      else if(pow(mid,n)<m)l=mid+1;
+      else h=mid-1;
+    }
+  return -1;
+}
