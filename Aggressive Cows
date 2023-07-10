@@ -1,0 +1,25 @@
+bool isPoss(int mid,vector<int> &a, int k){
+    int cnt=1,last = a[0];
+    for(int i=1;i<a.size();i++){
+        if(a[i]-last>=mid){
+            cnt++;
+            last = a[i];
+        }
+    }
+    if(cnt>=k)return true;
+    return false;
+}
+int aggressiveCows(vector<int> &a, int k)
+{
+    sort(a.begin(),a.end());
+    int n = a.size();
+    int l= 1,h = a[n-1]-a[0];
+    while(l<=h){
+        int mid = (l+h)>>1;
+        if(isPoss(mid,a,k)){
+            l=mid+1;
+        }
+        else h = mid-1;
+    }
+    return h;
+}
