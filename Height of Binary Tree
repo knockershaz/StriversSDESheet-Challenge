@@ -1,0 +1,10 @@
+int find(TreeNode<int>* root)
+{
+    if(root==NULL)return 0;
+    int l = find(root->left);
+    int r = find(root->right);
+    return max(l,r)+1;
+}
+int maxDepth(TreeNode<int> *root) {
+    return (find(root)-1);
+}
