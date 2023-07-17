@@ -1,0 +1,12 @@
+void find(TreeNode* root,vector<int>&res){
+    if(root==NULL)return;
+    res.push_back(root->data);
+    find(root->left,res);
+    find(root->right,res);
+}
+vector<int> getPreOrderTraversal(TreeNode *root)
+{
+    vector<int>res;
+    find(root,res);
+    return res;
+}
