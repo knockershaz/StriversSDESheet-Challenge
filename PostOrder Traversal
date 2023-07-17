@@ -1,0 +1,12 @@
+void find(TreeNode* root,vector<int>&res){
+    if(root==NULL)return;
+    find(root->left,res);
+    find(root->right,res);
+    res.push_back(root->data);
+}
+vector<int> getPostOrderTraversal(TreeNode *root)
+{
+    vector<int>res;
+    find(root,res);
+    return res;
+}
