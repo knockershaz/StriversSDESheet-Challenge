@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+int height(TreeNode<int> *root){
+    if(!root)return 0;
+    int l = height(root->left);
+    int r = height(root->right);
+    return 1+max(l,r);
+}
+
+int diameterOfBinaryTree(TreeNode<int> *root)
+{
+	if(!root)return 0;
+    stack<TreeNode<int>*>st;
+    st.push(root);
+    int res = INT_MIN;
+    while(!st.empty()){
+        auto it = st.top();st.pop();
+        int l,r;
+        if(it->left)l = height(it->left);
+        else l=0;
+        if(it->right)r = height(it->right);
+        else r=0;
+        res = max(res,l+r);
+        if(it->left)st.push(it->left);
+        if(it->right)st.push(it->right);
+    }
+    return res;
+}
