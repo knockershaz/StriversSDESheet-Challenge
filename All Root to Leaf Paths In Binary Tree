@@ -1,0 +1,21 @@
+void find(BinaryTreeNode < int > * root,set<string>&res,string s){
+    if(root==NULL)return;
+    s+=to_string(root->data);
+    s+=" ";
+    if(root->left==NULL and root->right==NULL){
+        res.insert(s);
+        return;
+    }
+    
+    find(root->left,res,s);
+    find(root->right,res,s);
+    return;
+}
+
+vector < string > allRootToLeaf(BinaryTreeNode < int > * root) {
+    if(!root)return {};
+    set<string>res;
+    find(root,res,"");
+    vector<string>ans(res.begin(),res.end());
+    return ans;
+}
