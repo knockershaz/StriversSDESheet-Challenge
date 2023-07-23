@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+int maxSum(TreeNode<int> *root,int &sum){
+    if(!root)return 0;
+    int l = max(0,maxSum(root->left,sum));
+    int r = max(0,maxSum(root->right,sum));
+    sum = max(sum,l+r+root->data);
+    return max(l,r)+root->data;
+}
+int maxPathSum(TreeNode<int> *root)
+{
+    int maxi = INT_MIN;
+    maxSum(root,maxi);
+    return maxi;
+}
