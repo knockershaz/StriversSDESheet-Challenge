@@ -1,0 +1,15 @@
+TreeNode<int> *flattenBinaryTree(TreeNode<int> *root)
+{
+    TreeNode<int>* res = new TreeNode<int>(0);
+    TreeNode<int>* ans = res;
+    stack<TreeNode<int>*>st;
+    st.push(root);
+    while(!st.empty()){
+        auto it = st.top();st.pop();
+        ans->right = new TreeNode<int>(it->data);
+        ans = ans->right;
+        if(it->right)st.push(it->right);
+        if(it->left)st.push(it->left);
+    }
+    return res->right;
+}
