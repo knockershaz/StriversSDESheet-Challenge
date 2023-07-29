@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+void find(int ind ,vector<int>&a,vector<int>&ds,vector<vector<int>>&ans,
+         int target,int n)
+{
+    if(target==0)
+    {
+        ans.push_back(ds);
+        return;
+    }
+    for(int i=ind; i<n;i++)
+    {
+        if(i>ind and a[i]==a[i-1])continue;
+        if(target<a[i])break;
+        ds.push_back(a[i]);
+        find(i+1,a,ds,ans,target-a[i],n);
+        ds.pop_back();
+    }
+}
+vector<vector<int>> combinationSum2(vector<int> &arr, int n, int target)
+{
+	// Write your code here.
+    vector<vector<int>> ans;
+    vector<int>ds;
+    sort(arr.begin(),arr.end());
+    find(0,arr,ds,ans,target,n);
+    return ans;
+}
