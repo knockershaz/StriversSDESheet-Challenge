@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+
+long countWaysToMakeChange(int *denominations, int n, int value)
+
+{
+
+    //Write your code here
+
+    // vector<vector<int>> dp(n , vector<int> (value +1, 0));
+
+    vector<long> prev(value + 1, 0) , cur(value+1 , 0);
+
+ 
+
+    for(int tar = 0; tar <= value ; tar++){
+
+        prev[tar] = (tar%denominations[0] == 0);
+
+    }
+
+    for(int ind = 1; ind< n ; ind++){
+
+      for (int tar = 0; tar <= value; tar++) {
+
+        long notpick = prev[tar];
+
+        long pick = 0;
+
+        if (tar >= denominations[ind])
+
+          pick = cur[tar - denominations[ind]];
+
+ 
+
+        cur[tar] = pick + notpick;
+
+      }
+
+      prev = cur;
+
+    }
+
+     return prev[value];
+
+}
+
+ 
+
+// //Memoization method
+
+// #include<bits/stdc++.h>
+
+// long f(int ind , int tar , int *denominations, vector<vector<long>> &dp){
+
+//     if(ind == 0) {
+
+//         return (tar % denominations[0] == 0);
+
+//     }
+
+//     if(dp[ind][tar] != -1) return dp[ind][tar];
+
+//     long notpick = f(ind-1, tar, denominations ,dp);
+
+//     long pick = 0;
+
+//     if(tar >= denominations[ind]) pick = f(ind, tar - denominations[ind], denominations, dp);
+
+ 
+
+//     return dp[ind][tar] =  pick + notpick;
+
+// }
+
+ 
+
+// long countWaysToMakeChange(int *denominations, int n, int value)
+
+// {
+
+//     //Write your code here
+
+//     vector<vector<long>> dp(n , vector<long> (value+1, -1));
+
+//     return f(n-1, value, denominations, dp);
+
+// }
