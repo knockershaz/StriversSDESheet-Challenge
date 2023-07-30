@@ -1,0 +1,19 @@
+graphNode * help(graphNode *node,unordered_map<graphNode *,graphNode *>&mp){
+	graphNode *newnode=new graphNode(node->data);
+	mp[node]=newnode;
+	vector<graphNode *>v;
+	for(auto i:node->neighbours){
+		if(mp.find(i)!=mp.end()){
+			v.push_back(mp[i]);
+		}else{
+			v.push_back(help(i,mp));
+		}
+	}
+	newnode->neighbours=v;
+	return newnode;
+}
+graphNode *cloneGraph(graphNode *node)
+{
+	unordered_map<graphNode *,graphNode *>mp;
+	return help(node,mp);
+}
