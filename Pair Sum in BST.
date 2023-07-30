@@ -1,0 +1,16 @@
+bool solve(BinaryTreeNode<int> * root, unordered_set<int>& st, int k){
+    if(!root) return  0;
+    int diff=k-root->data;
+    if(st.find(diff)!=st.end()){ return true;}
+    st.insert(root->data);
+    return solve(root->left, st,k) || solve(root->right,st,k);
+
+
+}
+bool pairSumBst(BinaryTreeNode<int> *root, int k)
+{
+    // Write your code here
+    unordered_set<int> st;
+    return solve(root,st,k);
+
+}
